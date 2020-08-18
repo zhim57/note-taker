@@ -6,7 +6,6 @@
 
 let db = require("../Develop/db/db.json");
  
-// var waitListData = require("../data/waitinglistData");
 
 // ===============================================================================
 // ROUTING
@@ -48,52 +47,13 @@ module.exports = function (app) {
 
     app.put('/api/notes/', function (req, res){
         // edit the existing note in db.json
-        // dbCars=dbCars.filter(e =>e.id !=req.body.id);
+
         let newR = { "title" : req.body.title, "text":req.body.text, "id":req.body.id};
-        // let id = req.body.id
+      
         db[req.body.id]= newR;
         
-        // console.log(req);
-        
 
-        // dbCars[req.params.id].model=req.body.model;
         res.json("true");   
     });   
 };
 
-
-    // app.get("/api/waitlist", function (req, res) {
-    //     res.json(waitListData);
-    // });
-
-
-    //     * GET `/notes` - Should return the `notes.html` file.
-
-    //   * GET `*` - Should return the `index.html` file
-
-    // API POST Requests
-    // Below code handles when a user submits a form and thus submits data to the server.
-    // In each of the below cases, when a user submits form data (a JSON object)
-    // ...the JSON is pushed to the appropriate JavaScript array
-    // (ex. User fills out a reservation request... this data is then sent to the server...
-    // Then the server saves the data to the tableData array)
-    // ---------------------------------------------------------------------------
-
-    // app.post("/api/notes", function (req, res) {
-
-        
-    //         activeNote.push(req.body);
-    //         res.json(true);
-        
-
-    // });
-    // ---------------------------------------------------------------------------
-    // I added this below code so you could clear out the table while working with the functionality.
-    // Don"t worry about it!
-    // app.post("/api/clear", function (req, res) {
-    //     activeNote.length = 0;
-       
-
-    //     res.json({ ok: true });
-    // });
-// };

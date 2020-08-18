@@ -20,16 +20,16 @@ module.exports = function (app) {
 
     // If no matching route is found default to home
  
-    app.get("/styles.css", function (req, res) {
-        res.sendFile(path.join(__dirname, "../Develop/public/assets/css/styles.css"));
-    });
+    // app.get("/styles.css", function (req, res) {
+    //     res.sendFile(path.join(__dirname, "../Develop/public/assets/css/styles.css"));
+    // });
     app.get("/notes", function (req, res) {
         res.sendFile(path.join(__dirname, "../Develop/public/notes.html"));
     });
   
-    app.get("/index.js", function (req, res) {
-        res.sendFile(path.join(__dirname, "../Develop/public/assets/js/index.js"));
-    });
+    // app.get("/index.js", function (req, res) {
+    //     res.sendFile(path.join(__dirname, "../Develop/public/assets/js/index.js"));
+    // });
 
     app.get("*", function (req, res) {
         res.sendFile(path.join(__dirname, "../Develop/public/index.html"));
