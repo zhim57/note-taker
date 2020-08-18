@@ -4,12 +4,8 @@
 // These data sources hold arrays of information on table-data, waitinglist, etc.
 // ===============================================================================
 
-// var activeNote = require("../Develop/public/assets/js/index");
 let db = require("../Develop/db/db.json");
-// let dbCars = require("../Develop/db/dbCars.json");
-// var fs = require ("fs");
-
-
+ 
 // var waitListData = require("../data/waitinglistData");
 
 // ===============================================================================
@@ -28,16 +24,12 @@ module.exports = function (app) {
         // sending a list of notes 
         return res.json(db);
     });
-    // app.get("/api/notes/edit", function (req, res) {
-    //     // sending a list of notes 
-    //     return res.json(dbCars[id-1]);
-        
-    // });
+   
     app.post("/api/notes", function (req, res) {
         // posting the note into the db.json 
         let newNote={
-           make: req.body.make,
-           model: req.body.model,
+           title: req.body.title,
+           text: req.body.text,
            id: (db.length)
         };
         db.push(newNote);
@@ -57,11 +49,11 @@ module.exports = function (app) {
     app.put('/api/notes/', function (req, res){
         // edit the existing note in db.json
         // dbCars=dbCars.filter(e =>e.id !=req.body.id);
-        let newR = { "make" : req.body.make, "model":req.body.model, "id":req.body.id};
+        let newR = { "title" : req.body.title, "text":req.body.text, "id":req.body.id};
         // let id = req.body.id
         db[req.body.id]= newR;
         
-        console.log(req);
+        // console.log(req);
         
 
         // dbCars[req.params.id].model=req.body.model;
