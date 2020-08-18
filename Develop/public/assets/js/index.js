@@ -1,8 +1,10 @@
 const $noteTitle = $(".note-title");
 const $noteText = $(".note-textarea");
 const $saveNoteBtn = $(".save-note");
+const $editNoteBtn = $(".edit-note");
 const $newNoteBtn = $(".new-note");
 const $noteList = $(".list-container .list-group");
+var newNoteBoolean = true;
 
 // activeNote is used to keep track of the note in the textarea
 let activeNote = {};
@@ -17,12 +19,16 @@ const getNotes = () => {
 
 // A function for saving a note to the db
 const saveNote = (note) => {
+
+  // saveDBJson()
+
   return $.ajax({
     url: "/api/notes",
     data: note,
     method: "POST",
   });
 };
+
 
 // A function for deleting a note from the db
 const deleteNote = (id) => {
@@ -51,16 +57,66 @@ const renderActiveNote = () => {
 
 // Get the note data from the inputs, save it to the db and update the view
 const handleNoteSave = function () {
-  const newNote = {
-    title: $noteTitle.val(),
-    text: $noteText.val(),
-  };
+  if (newNoteBoolean === true) {
+    const newNote = {
+      title: $noteTitle.val(),
+      text: $noteText.val(),
 
-  saveNote(newNote).then(() => {
+    };
+
+
+    saveNote(newNote).then(() => {
+      getAndRenderNotes();
+      renderActiveNote();
+
+
+    });
+  }
+  else {
+    saveEditedNote()
+    console.log("edit succesful")
     getAndRenderNotes();
-    renderActiveNote();
-  });
+    $noteTitle.val("");
+    $noteText.val("");
+    newNoteBoolean = true;
+  }
 };
+
+var editedNote;
+const handleNoteEdit = () => {
+  newNoteBoolean = false;
+  if (activeNote.id) {
+    editActiveNote()
+  }
+  else {
+    console.log("nice try");
+  }
+};
+
+const saveEditedNote = () => {
+  editedNote = {
+title: $noteTitle.val(),
+    text: $noteText.val(),
+    id: activeNote.id,
+
+  }
+  return $.ajax({
+    url: "/api/notes/",
+    data: editedNote,
+    method: "PUT",
+  });
+
+}
+
+const editActiveNote = function () {
+  $noteTitle.attr("readonly", false);
+  $noteText.attr("readonly", false);
+  $noteTitle.val(activeNote.title);
+  $noteText.val(activeNote.text);
+  id: activeNote.id
+
+};
+
 
 // Delete the clicked note
 const handleNoteDelete = function (event) {
@@ -82,6 +138,7 @@ const handleNoteDelete = function (event) {
 // Sets the activeNote and displays it
 const handleNoteView = function () {
   activeNote = $(this).data();
+  console.log(activeNote);
   renderActiveNote();
 };
 
@@ -141,6 +198,7 @@ const getAndRenderNotes = () => {
 };
 
 $saveNoteBtn.on("click", handleNoteSave);
+$editNoteBtn.on("click", handleNoteEdit);
 $noteList.on("click", ".list-group-item", handleNoteView);
 $newNoteBtn.on("click", handleNewNoteView);
 $noteList.on("click", ".delete-note", handleNoteDelete);

@@ -4,7 +4,8 @@
 // ==============================================================================
 
 var express = require("express");
-// var path = require("path");
+// var fs = require ("fs");
+var path = require("path");
 
 // ==============================================================================
 // EXPRESS CONFIGURATION
@@ -27,8 +28,8 @@ app.use(express.json());
 // These routes give our server a "map" of how to respond when users visit or request data from various URLs.
 // ================================================================================
 
-require("./routes/apiRoutes")(app);
-require("./routes/htmlRoutes")(app);
+require("../routes/apiRoutes")(app);
+require("../routes/htmlRoutes")(app);
 
 // =============================================================================
 // LISTENER
@@ -37,5 +38,5 @@ require("./routes/htmlRoutes")(app);
 
 
 app.listen(PORT, function() {
-  console.log("App listening on PORT " + PORT);
+  console.log("Server listening on: http://localhost:" + PORT);
 });
