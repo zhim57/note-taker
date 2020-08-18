@@ -44,7 +44,7 @@ please email Jivko Atanassov with any questions at: zhim57@yahoo.com. Thank You.
 
 [link to this portfolio](https://github.com/zhim57/note-taker)
 
-[link to the deployed application](heroku)
+[link to the deployed application](https://afternoon-escarpment-50601.herokuapp.com/)
   
 
 ## Screenshots
