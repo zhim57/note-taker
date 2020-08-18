@@ -74,7 +74,7 @@ const handleNoteSave = function () {
   }
   else {
     saveEditedNote()
-    console.log("edit succesful")
+    // console.log("edit succesful")
     getAndRenderNotes();
     $noteTitle.val("");
     $noteText.val("");
@@ -138,7 +138,7 @@ const handleNoteDelete = function (event) {
 // Sets the activeNote and displays it
 const handleNoteView = function () {
   activeNote = $(this).data();
-  console.log(activeNote);
+  // console.log(activeNote);
   renderActiveNote();
 };
 
