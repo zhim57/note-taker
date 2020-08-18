@@ -19,20 +19,24 @@ module.exports = function (app) {
     //   * GET `*` - Should return the `index.html` file
 
     // If no matching route is found default to home
-    app.get("*", function (req, res) {
-        res.sendFile(path.join(__dirname, "../public/index.html"));
-    });
+    console.log(__dirname);
+console.log(process.cwd());
 
+    app.get("/styles.css", function (req, res) {
+        res.sendFile(path.join(__dirname, "../Develop/public/assets/css/styles.css"));
+    });
+    app.get("/", function (req, res) {
+        res.sendFile(path.join(__dirname, "../Develop/public/index.html"));
+    });
     app.get("/notes", function (req, res) {
-        res.sendFile(path.join(__dirname, "../public/notes.html"));
+        res.sendFile(path.join(__dirname, "../Develop/public/notes.html"));
+    });
+    app.get("/test", function (req, res) {
+        res.sendFile(path.join(__dirname,"../Develop/public/test.html"));
+    });
+    app.get("/index.js", function (req, res) {
+        res.sendFile(path.join(__dirname,"../Develop/public/assets/js/index.js"));
     });
 
-    // app.get("/reserve", function (req, res) {
-    //     res.sendFile(path.join(__dirname, "../public/reserve.html"));
-    // });
 
-    // app.get("*", function (req, res) {
-    //     res.sendFile(path.join(__dirname, "../public/404.html"));
-
-    // });
 };
